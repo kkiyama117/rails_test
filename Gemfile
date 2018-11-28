@@ -60,6 +60,7 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'pry'
+  gem 'pry-byebug'
   gem 'pry-doc'
   gem 'pry-rails'
   gem 'pry-remote'
@@ -76,6 +77,7 @@ end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
+  gem 'letter_opener'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'
 end

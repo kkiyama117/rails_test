@@ -19,7 +19,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
-  # More info at:
   # https://github.com/plataformatec/devise#omniauth
 
   # GET|POST /resource/auth/twitter
