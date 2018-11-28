@@ -41,34 +41,50 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 
+# pager
+gem 'kaminari'
+
+# SEO
+gem 'meta-tags'
+gem 'sitemap_generator'
+
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  # speed up
+  gem 'spring'
+  gem 'spring-commands-rspec'
+  gem 'spring-watcher-listen', '~> 2.0.0'
   # Rspec test
   gem 'factory_bot_rails'
   gem 'faker'
   # pry
-  gem 'pry-byebug'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'pry'
+  gem 'pry-doc'
+  gem 'pry-rails'
+  gem 'pry-remote'
+  # Rspec
+  gem 'email_spec'
+  gem 'rspec'
+  gem 'rspec-rails'
+  # テスト高速化
+  gem 'guard', '>= 2.2.2', require: false
+  gem 'guard-livereload', require: false
+  gem 'guard-rspec', require: false
+  gem 'rack-livereload'
 end
 
 group :development do
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
-  # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
-  # Rspec
-  gem 'rspec'
-  gem 'rspec-rails'
+  gem 'selenium-webdriver'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
