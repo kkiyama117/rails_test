@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 # omniauth controller for user
-class Users
+module Users
+  # omniauth
   class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     # You should configure your model like this:
     # devise :omniauthable, omniauth_providers: [:twitter]
@@ -45,7 +46,5 @@ class Users
         redirect_to new_user_registration_url
       end
     end
-
-    render :close, layout: false
   end
 end
