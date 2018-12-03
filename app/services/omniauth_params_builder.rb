@@ -45,7 +45,7 @@ class OmniauthParamsBuilder
   def get_data_with_auth(auth)
     data = {}
     if auth.fetch('provider') == 'facebook'
-      name = auth['extra']['raw_info.name']
+      name = auth['info']['name']
       email = auth['info']['email']
       provider = auth['provider']
       uid = auth['uid']

@@ -21,7 +21,7 @@ class User < ApplicationRecord
       devise_data = session['devise.user_attributes']
       user_data = OmniauthParamsBuilder.new(model_name: 'User', auth: devise_data).run
       user.attributes = user_data
-      user.valid?
+      # user.valid?
     end
   end
 end
