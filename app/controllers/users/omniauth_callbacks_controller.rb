@@ -36,10 +36,10 @@ module Users
       auth = request.env['omniauth.auth']
       user = User.find_by_auth(auth)
       if user.present?
-        sign_in_and_redirect @user, event: :authentication
+        sign_in_and_redirect user, event: :authentication
         set_flash_message(:notice, :success, kind: auth.provider) if is_navigational_format?
       elsif current_user.present?
-        auth_data = OmniauthParamsBuilder.new(model_name: 'Authentication', auth: auth)
+        auth_data = OmniauthParamsBuilder.new(model_name: 'Authentication', auth: auth).run
         auth_data.update(user_id: current_user.id)
         Authentication.create(auth_data)
         redirect_to user_root_path

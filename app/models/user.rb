@@ -13,13 +13,13 @@ class User < ApplicationRecord
   scope :find_by_auth, lambda { |auth|
     with_auth.merge(Authentication.where(
                       provider: auth.provider, uid: auth.uid
-                    )).first
+                    ))
   }
 
   def self.new_with_session(params, session)
     devise_data = session['devise.user_attributes']
     if devise_data
-      user_data = OmniauthParamsBuilder.new(model_name: 'User', auth: devise_data)
+      user_data = OmniauthParamsBuilder.new(model_name: 'User', auth: devise_data).run
       new(user_data) do |user|
         user.attributes = params
       end

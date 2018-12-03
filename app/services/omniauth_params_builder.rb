@@ -18,7 +18,7 @@ class OmniauthParamsBuilder
       %i[name email]
       # %i[name email password]
     elsif model_name == 'Authentication'
-      %i[provider token uid]
+      %i[provider uid token]
     end
   end
 
@@ -26,12 +26,12 @@ class OmniauthParamsBuilder
 
   def get_data_with_auth(auth)
     data = {}
-    if auth.provider == 'facebook'
-      name = auth.extra.raw_info.name
-      email = auth.info.email
-      provider = auth.provider
-      uid = auth.uid
-      token = auth.credentials.token
+    if auth.fetch('provider') == 'facebook'
+      name = auth['extra']['raw_info.name']
+      email = auth['info']['email']
+      provider = auth['provider']
+      uid = auth['uid']
+      token = auth['credentials']['token']
       data.update(name: name, email: email, provider: provider, uid: uid, token: token)
     end
     # data.update(password: Devise.friendly_token.first(10))
