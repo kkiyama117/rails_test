@@ -6,11 +6,7 @@ class AuthenticationsController < ApplicationController
 
   def create
     auth = request.env['omniauth.auth']
-    uid = auth['uid']
-    provider = auth['provider']
-    unless Auth.find_by_uid_and_provider(uid, provider)
-      Auth.create(uid: uid, provider: provider, user_id: current_user.id)
-    end
+    Authentication.create_with_auth_data(auth, user: current_user)
     redirect_to root_url
   end
 

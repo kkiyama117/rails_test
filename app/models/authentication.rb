@@ -8,7 +8,11 @@ class Authentication < ApplicationRecord
   validates_uniqueness_of :uid, scope: :provider
   validates :provider, inclusion: { in: %w[github facebook google] }
 
-  def self.from_omniauth(auth, user)
+  def self.find_user_by(auth)
+    find_by(provider: auth.provider, uid: auth.uid).user
+  end
+
+  def self.create_with_auth_data(auth, user)
     auth = find_or_initialize_by provider: auth.provider, uid: auth.uid
     auth.token = auth.credentials.token
 
