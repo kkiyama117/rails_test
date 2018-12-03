@@ -22,6 +22,7 @@ class User < ApplicationRecord
       user_data = OmniauthParamsBuilder.new(model_name: 'User', auth: devise_data).run
       new(user_data) do |user|
         user.attributes = params
+        user.valid?
       end
     else
       super
