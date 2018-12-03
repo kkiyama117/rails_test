@@ -8,11 +8,11 @@ class Authentication < ApplicationRecord
   validates_uniqueness_of :uid, scope: :provider
   validates :provider, inclusion: { in: %w[github facebook google] }
 
-  def self.find_user_by(auth)
-    auth = find_by(provider: auth.provider, uid: auth.uid)
-    nil if auth.nil?
-    auth.user
-  end
+  scope :_user_by, -> { joins(:user) }
+  scope :find_user_by, lambda { |auth|
+    provider = find_by(provider: auth.provider, uid: auth.uid)
+    provider.user if provider.present?
+  }
 
   # TODO(kkiyama117): Divide User#Create
   def self.create_with_auth_data(auth, user)

@@ -35,7 +35,7 @@ module Users
     def base_action
       auth = request.env['omniauth.auth']
       user = Authentication.find_user_by(auth)
-      if user.persisted?
+      if user.present?
         # this will throw if @user is not activated
         sign_in_and_redirect @user, event: :authentication
         set_flash_message(:notice, :success, kind: auth.provider) if is_navigational_format?
