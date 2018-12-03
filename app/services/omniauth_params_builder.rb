@@ -12,15 +12,19 @@ class OmniauthParamsBuilder
   def run
     needed = column_needed_by_model @model
     data = get_data_with_auth(@auth)
-    result = {}
-    if needed.present?
-      needed.each do |key|
-        result.update(data.slice(key))
-      end
-      result
-    else
+    if needed.blank?
       data
+    else
+      get_hash_with_keys needed, data
     end
+  end
+
+  def get_hash_with_keys(keys, data)
+    result = {}
+    keys.each do |key|
+      result.update(data.slice(key))
+    end
+    result
   end
 
   def column_needed_by_model(model_name)
