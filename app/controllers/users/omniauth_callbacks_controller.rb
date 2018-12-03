@@ -34,14 +34,18 @@ module Users
 
     def base_action
       auth = request.env['omniauth.auth']
-      user = Authentication.find_user_by(auth)
+      user = User.find_by_auth(auth)
       if user.present?
-        # this will throw if @user is not activated
         sign_in_and_redirect @user, event: :authentication
         set_flash_message(:notice, :success, kind: auth.provider) if is_navigational_format?
+      elsif current_user.present?
+        auth_data = OmniauthParamsBuilder.new(model_name: 'Authentication', auth: auth)
+        auth_data.update(user_id: current_user.id)
+        Authentication.create(auth_data)
+        redirect_to user_root_path
       else
-        session["devise.#{auth.provider}_data"] = request.env['omniauth.auth']
-        redirect_to new_user_registration_url
+        session['devise.user_attributes'] = auth
+        redirect_to new_user_registration_path
       end
     end
   end
