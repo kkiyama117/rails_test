@@ -12,7 +12,6 @@ class Authentication < ApplicationRecord
     auth = find_or_initialize_by provider: auth.provider, uid: auth.uid
     auth.token = auth.credentials.token
 
-    user.password = Devise.friendly_token.first(10)
     transaction do
       auth.user ||= user || User.create!(get_user_data_from(auth))
       auth.save! if auth.changed?
@@ -28,7 +27,7 @@ class Authentication < ApplicationRecord
       email = auth.info.email
       data = { name: name, email: email }
     end
-    data.store('password', Devise.friendly_token[0, 10])
+    data.store('password', Devise.friendly_token.first(10))
     data
   end
 end
