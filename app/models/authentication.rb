@@ -27,7 +27,7 @@ class Authentication < ApplicationRecord
       email = auth.info.email
       data = { name: name, email: email }
     end
-    data.store('password', Devise.friendly_token.first(10))
+    data.update(password: Devise.friendly_token.first(10))
     data
   end
 end
