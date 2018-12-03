@@ -9,7 +9,6 @@ module Users
     # GET /resource/sign_up
     def new
       super
-      session['devise.user_attributes']
     end
 
     # POST /resource

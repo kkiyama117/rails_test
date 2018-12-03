@@ -10,7 +10,17 @@ class OmniauthParamsBuilder
   end
 
   def run
-    get_data_with_auth(@auth).slice(column_needed_by_model(@model))
+    needed = column_needed_by_model @model
+    data = get_data_with_auth(@auth)
+    result = {}
+    if needed.present?
+      needed.each do |key|
+        result.update(data.slice(key))
+      end
+      result
+    else
+      data
+    end
   end
 
   def column_needed_by_model(model_name)
@@ -19,6 +29,10 @@ class OmniauthParamsBuilder
       # %i[name email password]
     elsif model_name == 'Authentication'
       %i[provider uid token]
+    elsif model_name.blank?
+      nil
+    else
+      raise ValueError('error')
     end
   end
 

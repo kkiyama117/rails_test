@@ -42,6 +42,7 @@ module Users
         auth_data = OmniauthParamsBuilder.new(model_name: 'Authentication', auth: auth).run
         auth_data.update(user_id: current_user.id)
         Authentication.create(auth_data)
+        set_flash_message(:notice, :success, kind: auth.provider) if is_navigational_format?
         redirect_to user_root_path
       else
         session['devise.user_attributes'] = auth
