@@ -6,13 +6,15 @@ class AuthenticationsController < ApplicationController
 
   def create
     auth = request.env['omniauth.auth']
-    Authentication.create_with_auth_data(auth, user: current_user)
+    unless Authentication.find_user_by auth
+      Authentication.create_with_auth_data(auth, user: current_user)
+    end
     redirect_to root_url
   end
 
   def destroy
     provider = params[:provider]
-    auth = Auth.find_by_provider_and_user_id(provider, current_user.id)
+    auth = Authentication.find_by(provider: provider, user: current_user)
     auth.destroy
     redirect_to root_url
   end

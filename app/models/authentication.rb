@@ -9,9 +9,12 @@ class Authentication < ApplicationRecord
   validates :provider, inclusion: { in: %w[github facebook google] }
 
   def self.find_user_by(auth)
-    find_by(provider: auth.provider, uid: auth.uid).user
+    auth = find_by(provider: auth.provider, uid: auth.uid)
+    nil if auth.nil?
+    auth.user
   end
 
+  # TODO(kkiyama117): Divide User#Create
   def self.create_with_auth_data(auth, user)
     auth = find_or_initialize_by provider: auth.provider, uid: auth.uid
     auth.token = auth.credentials.token
