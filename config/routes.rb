@@ -4,10 +4,10 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
-    passwords: 'users/passwords'
+    passwords: 'users/passwords',
+    omniauth_callbacks: 'users/omniauth_callbacks'
   }
-  # user_root_path
-  get '/auth/:action/callback', controller: 'authentications', constraints: { action: /facebook/ }
+  # get '/auth/:action/callback', controller: 'authentications', constraints: { action: /facebook/ }
 
   # user root
   get 'users', action: :show, controller: :users, as: :user_root
