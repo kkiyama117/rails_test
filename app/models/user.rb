@@ -5,7 +5,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :omniauthable
+         :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:facebook]
   validates :name, presence: true, length: { maximum: 15 }, uniqueness: { case_sensitive: false }
 
   has_many :authentications, dependent: :delete_all
@@ -19,9 +19,11 @@ class User < ApplicationRecord
   def self.new_with_session(params, session)
     super.tap do |user|
       devise_data = session['devise.user_attributes']
-      user_data = OmniauthParamsBuilder.new(model_name: 'User', auth: devise_data).run
-      user.attributes = user_data
-      # user.valid?
+      if devise_data.present?
+        user_data = OmniauthParamsBuilder.new(model_name: 'User', auth: devise_data).run
+        user.attributes = user_data
+        # user.valid?
+      end
     end
   end
 end

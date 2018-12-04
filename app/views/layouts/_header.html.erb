@@ -6,29 +6,39 @@
     <p class="alert alert-error"><%= alert %></p>
   <% end %>
   <nav id="user-info">
-    <%- if controller_name != 'sessions' %>
-      <%= link_to "Log in", new_session_path(User) %><br/>
-    <% end -%>
+    <% if !user_signed_in? %>
+      <%- if controller_name != 'sessions' %>
+        <%= link_to "Log in", new_session_path(User) %><br/>
+      <% end -%>
 
-    <%- if controller_name != 'registrations' %>
-      <%= link_to "Sign up", new_registration_path(User) %><br/>
-    <% end -%>
+      <%- if controller_name != 'registrations' %>
+        <%= link_to "Sign up", new_registration_path(User) %><br/>
+      <% end -%>
 
-    <%- if controller_name != 'passwords' && controller_name != 'registrations' %>
-      <%= link_to "Forgot your password?", new_password_path(User) %><br/>
-    <% end -%>
+      <%- if controller_name != 'passwords' && controller_name != 'registrations' %>
+        <%= link_to "Forgot your password?", new_password_path(User) %><br/>
+      <% end -%>
 
-    <%#- if controller_name != 'confirmations' %>
-    <!--      <%#= link_to "Didn't receive confirmation instructions?", new_confirmation_path(User) %><br/>-->
-    <%# end -%>
+      <%#- if controller_name != 'confirmations' %>
+      <!--      <%#= link_to "Didn't receive confirmation instructions?", new_confirmation_path(User) %><br/>-->
+      <%# end -%>
 
-    <%#- if controller_name != 'unlocks' %>
-    <!--      <%#= link_to "Didn't receive unlock instructions?", new_unlock_path(User) %><br/>-->
-    <%# end -%>
+      <%#- if controller_name != 'unlocks' %>
+      <!--      <%#= link_to "Didn't receive unlock instructions?", new_unlock_path(User) %><br/>-->
+      <%# end -%>
 
-    <%- User.omniauth_providers.each do |provider| %>
-      <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(User, provider) %>
-      <br/>
-    <% end -%>
+      <%- User.omniauth_providers.each do |provider| %>
+        <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(User, provider) %>
+        <br/>
+      <% end -%>
+    <% else %>
+      <%- if controller_name != 'registrations' %>
+        <%= link_to "Edit your profile", edit_registration_path(User) %><br/>
+      <% end -%>
+      <%- User.omniauth_providers.each do |provider| %>
+        <%= link_to "link with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(User, provider) %>
+        <br/>
+      <% end -%>
+    <% end %>
   </nav>
 </header>

@@ -15,8 +15,11 @@ module Users
     def create
       super do |user|
         devise_data = session['devise.user_attributes']
-        auth_data = OmniauthParamsBuilder.new(model_name: 'Authentication', auth: devise_data).run
-        user.authentications.create(auth_data)
+        if devise_data.present?
+          auth_data = OmniauthParamsBuilder.new(model_name: 'Authentication', auth: devise_data).run
+          user.authentications.create(auth_data)
+        end
+        user
       end
     end
 
