@@ -3,8 +3,8 @@
 module Users
   # Register controller
   class RegistrationsController < Devise::RegistrationsController
-    # before_action :configure_sign_up_params, only: [:create]
-    # before_action :configure_account_update_params, only: [:update]
+    before_action :configure_sign_up_params, only: [:create]
+    before_action :configure_account_update_params, only: [:update]
 
     # GET /resource/sign_up
     def new
@@ -13,7 +13,11 @@ module Users
 
     # POST /resource
     def create
-      super
+      super do |user|
+        devise_data = session['devise.user_attributes']
+        auth_data = OmniauthParamsBuilder.new(model_name: 'Authentication', auth: devise_data).run
+        user.authentications.create(auth_data)
+      end
     end
 
     # GET /resource/edit
@@ -22,9 +26,9 @@ module Users
     # end
 
     # PUT /resource
-    # def update
-    #   super
-    # end
+    def update
+      super
+    end
 
     # DELETE /resource
     # def destroy
@@ -44,12 +48,14 @@ module Users
 
     # If you have extra params to permit, append them to the sanitizer.
     def configure_sign_up_params
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+      devise_parameter_sanitizer.permit(:sign_up, keys:
+        [:name, authentications_attributes: %i[id provider uid token]])
     end
 
     # If you have extra params to permit, append them to the sanitizer.
     def configure_account_update_params
-      devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+      devise_parameter_sanitizer.permit(:account_update, keys:
+        [:name, authentications_attributes: [:_destroy]])
     end
 
     # The path used after sign up.

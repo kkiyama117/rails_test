@@ -1,0 +1,31 @@
+# 日本語でのコメントを許可
+AsciiComments:
+  Enabled: false
+
+# 複数行での「lambda」で「->」による省略記法を許可
+Lambda:
+  Enabled: false
+
+# クラスにコメントを残さない
+Documentation:
+  Enabled: false
+
+# 「and」「or」の使用を許可
+AndOr:
+  Enabled: false
+
+# ネストが深すぎる
+BlockNesting:
+  Max: 5
+
+# クラスの行数が多すぎる
+ClassLength:
+  Enabled: false
+
+# 行が長すぎる
+LineLength:
+  Max: 100
+
+# メソッドの行数が多すぎる
+MethodLength:
+  Enabled: false
