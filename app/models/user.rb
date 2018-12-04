@@ -9,12 +9,12 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 15 }, uniqueness: { case_sensitive: false }
 
   has_many :authentications, dependent: :delete_all
-  accepts_nested_attributes_for :authentications, allow_destroy: true,
-                                reject_if: :all_blank
+  accepts_nested_attributes_for :authentications, allow_destroy: true, reject_if: :all_blank
 
   scope :with_auth, -> { joins(:authentications) }
   scope :find_by_auth, lambda { |auth|
-    with_auth.merge(Authentication.where(provider: auth.provider, uid: auth.uid)) }
+    with_auth.merge(Authentication.where(provider: auth.provider, uid: auth.uid))
+  }
 
   def self.new_with_session(params, session)
     super.tap do |user|
