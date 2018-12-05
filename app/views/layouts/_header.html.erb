@@ -1,25 +1,21 @@
 <header>
+  <nav id="user-info">
+    <% if !user_signed_in? %>
+      <%= no_user_menu(self) %>
+      <%- User.omniauth_providers.each do |provider| %>
+        <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(User, provider) %>
+      <% end -%>
+    <% else %>
+      <%= user_menu(self) %>
+      <%- User.omniauth_providers.each do |provider| %>
+        <%= link_to "link with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(User, provider) %>
+      <% end -%>
+    <% end %>
+  </nav>
   <% if notice %>
     <p class="alert alert-notice"><%= notice %></p>
   <% end %>
   <% if alert %>
     <p class="alert alert-error"><%= alert %></p>
   <% end %>
-  <nav id="user-info">
-    <% if !user_signed_in? %>
-      <%= no_user_menu(self) %>
-      <%- User.omniauth_providers.each do |provider| %>
-        <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(User, provider) %>
-        <br/>
-      <% end -%>
-    <% else %>
-      <%- if controller_name != 'registrations' %>
-        <%= link_to "Edit your profile", edit_registration_path(User) %><br/>
-      <% end -%>
-      <%- User.omniauth_providers.each do |provider| %>
-        <%= link_to "link with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(User, provider) %><br/>
-      <% end -%>
-      <%= link_to "logout", destroy_session_path(User), method: :delete %><br/>
-    <% end %>
-  </nav>
 </header>
