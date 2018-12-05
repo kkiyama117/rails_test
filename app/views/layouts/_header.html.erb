@@ -8,10 +8,6 @@
   <nav id="user-info">
     <% if !user_signed_in? %>
       <%= no_user_menu(self) %>
-      <%#- if controller_name != 'confirmations' %>
-      <!--      <%#= link_to "Didn't receive confirmation instructions?", new_confirmation_path(User) %><br/>-->
-      <%# end -%>
-
       <%#- if controller_name != 'unlocks' %>
       <!--      <%#= link_to "Didn't receive unlock instructions?", new_unlock_path(User) %><br/>-->
       <%# end -%>

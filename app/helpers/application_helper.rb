@@ -13,15 +13,9 @@ module ApplicationHelper
     else
       used_methods = used_methods
     end
-    out = nil
-    used_methods.each do |method|
-      if out.nil?
-        out = capture { send(method, view) }
-      else
-        out << capture { send(method, view) }
-      end
-    end
-    out
+    used_methods.map do |method|
+      send(method, view)
+    end.join.html_safe
   end
 
   def login_link(view)
@@ -34,5 +28,9 @@ module ApplicationHelper
 
   def recover_password_link(view)
     view.raw view.link_to 'Forgot your password?', new_password_path(User)
+  end
+
+  def confirm_check_link(view)
+    view.raw view.link_to "Didn't receive confrimation instructions?", new_confirmation_path(User)
   end
 end
