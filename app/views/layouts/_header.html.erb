@@ -8,10 +8,6 @@
   <nav id="user-info">
     <% if !user_signed_in? %>
       <%= no_user_menu(self) %>
-      <%#- if controller_name != 'unlocks' %>
-      <!--      <%#= link_to "Didn't receive unlock instructions?", new_unlock_path(User) %><br/>-->
-      <%# end -%>
-
       <%- User.omniauth_providers.each do |provider| %>
         <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(User, provider) %>
         <br/>
