@@ -1,12 +1,12 @@
 <header>
   <nav id="user-info">
     <% if !user_signed_in? %>
-      <%= no_user_menu(self) %>
+      <%= no_user_menu %>
       <%- User.omniauth_providers.each do |provider| %>
         <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(User, provider) %>
       <% end -%>
     <% else %>
-      <%= user_menu(self) %>
+      <%= user_menu %>
       <%- User.omniauth_providers.each do |provider| %>
         <%= link_to "link with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(User, provider) %>
       <% end -%>

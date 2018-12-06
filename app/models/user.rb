@@ -17,13 +17,13 @@ class User < ApplicationRecord
   }
 
   def self.new_with_session(params, session)
-    super.tap do |user|
-      devise_data = session['devise.user_attributes']
-      if devise_data.present?
-        user_data = OmniauthParamsBuilder.new(model_name: 'User', auth: devise_data).run
-        user.attributes = user_data
-        # user.valid?
-      end
+    devise_data = session['devise.user_attributes']
+    user = new
+    if devise_data.present?
+      user_data = OmniauthParamsBuilder.new(model_name: 'User', auth: devise_data).run
+      user.attributes = user_data
     end
+    user.attributes = params
+    user
   end
 end
