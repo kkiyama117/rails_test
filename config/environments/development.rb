@@ -33,15 +33,15 @@ Rails.application.configure do
   config.active_storage.service = :local
 
   # mailer
-  config.action_mailer.default_url_options = { host: 'localhost:3000' }
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.smtp_settings = {
-    enable_starttls_auto: true,
     address: 'smtp.gmail.com',
     port: 587,
-    domain: 'smtp.gmail.com',
-    user_name: 'xxxx@gmail.com', # gmailのアドレス
-    password: 'xxxxxxxx',        # gmailのパスワード
-    authentication: 'login'
+    user_name: Rails.application.credentials.google[:gmail][:address],
+    password: Rails.application.credentials.google[:gmail][:password],
+    authentication: 'plain',
+    enable_starttls_auto: true
+
   }
 
   # Don't care if the mailer can't send.
