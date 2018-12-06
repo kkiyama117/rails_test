@@ -39,26 +39,26 @@ module HeaderHelper
 
   # each links
   def login_link
-    link_to('Log in', new_session_path(User))
+    link_to(I18n.t('devise.shared.links.sign_in'), new_session_path(User))
   end
 
   def sign_up_link
-    link_to('Sign up', new_registration_path(User))
+    link_to(I18n.t('devise.shared.links.sign_up'), new_registration_path(User))
   end
 
   def recover_password_link
-    link_to 'Forgot your password?', new_password_path(User)
+    link_to I18n.t('devise.shared.links.forgot_your_password'), new_password_path(User)
   end
 
   def confirm_check_link
-    link_to "Didn't receive confrimation instructions?", new_confirmation_path(User)
+    link_to I18n.t('devise.shared.links.didn_t_receive_confirmation_instructions'), new_confirmation_path(User)
   end
 
   def edit_profile_link
-    link_to 'Edit your profile', edit_registration_path(User)
+    link_to I18n.t('devise.shared.links.edit_profile'), edit_registration_path(User)
   end
 
   def logout_link
-    link_to 'logout', destroy_session_path(User), method: :delete
+    link_to I18n.t('devise.shared.links.sign_out'), destroy_session_path(User), method: :delete
   end
 end
