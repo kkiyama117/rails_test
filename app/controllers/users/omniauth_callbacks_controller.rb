@@ -8,6 +8,10 @@ module Users
       base_action
     end
 
+    def google
+      base_action
+    end
+
     # https://github.com/plataformatec/devise#omniauth
 
     # GET|POST /resource/auth/twitter

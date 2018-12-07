@@ -43,16 +43,22 @@ class OmniauthParamsBuilder
   private
 
   def get_data_with_auth(auth)
-    data = {}
-    if auth.fetch('provider') == 'facebook'
-      name = auth['info']['name']
-      email = auth['info']['email']
-      provider = auth['provider']
-      uid = auth['uid']
-      token = auth['credentials']['token']
-      data.update(name: name, email: email, provider: provider, uid: uid, token: token)
-    end
-    # data.update(password: Devise.friendly_token.first(10))
-    data
+    send(('get_data_with_' + auth.fetch('provider').to_s).to_sym, auth)
+  end
+
+  def get_data_with_facebook(auth)
+    { name: auth['info']['name'],
+      email: auth['info']['email'],
+      provider: auth['provider'],
+      uid: auth['uid'],
+      token: auth['credentials']['token'] }
+  end
+
+  def get_data_with_google(auth)
+    { name: auth['info']['name'],
+      email: auth['info']['email'],
+      provider: auth['provider'],
+      uid: auth['uid'],
+      token: auth['credentials']['token'] }
   end
 end

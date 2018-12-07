@@ -209,6 +209,10 @@ GEM
       rack (>= 1.6.2, < 3)
     omniauth-facebook (5.0.0)
       omniauth-oauth2 (~> 1.2)
+    omniauth-google-oauth2 (0.5.3)
+      jwt (>= 1.5)
+      omniauth (>= 1.1.1)
+      omniauth-oauth2 (>= 1.5)
     omniauth-oauth2 (1.5.0)
       oauth2 (~> 1.1)
       omniauth (~> 1.2)
@@ -373,6 +377,7 @@ DEPENDENCIES
   meta-tags
   omniauth
   omniauth-facebook
+  omniauth-google-oauth2
   pry
   pry-byebug
   pry-doc
