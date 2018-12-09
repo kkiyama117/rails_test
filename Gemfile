@@ -17,6 +17,8 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
+# admin
+gem 'pundit'
 
 # VIEW =========================================================================
 # decorator
