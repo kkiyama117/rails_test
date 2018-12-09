@@ -1,16 +1,25 @@
 <header>
-  <nav id="user-info">
-    <% if !user_signed_in? %>
-      <%= no_user_menu %>
-      <%- User.omniauth_providers.each do |provider| %>
-        <%= link_to t('devise.shared.links.sign_in_with_provider', provider: OmniAuth::Utils.camelize(provider)), omniauth_authorize_path(User, provider) %>
-      <% end -%>
-    <% else %>
-      <%= user_menu %>
-      <%- User.omniauth_providers.each do |provider| %>
-        <%= link_to t('devise.shared.links.link_to_provider', provider: OmniAuth::Utils.camelize(provider)), omniauth_authorize_path(User, provider) %>
-      <% end -%>
-    <% end %>
+  <nav id="header_menu">
+    <div class="header_menu">
+      <a href="#home">Home</a>
+      <a href="#news">News</a>
+      <button class="dropbtn">Dropdown
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <% if !user_signed_in? %>
+          <%= no_user_menu %>
+          <%- User.omniauth_providers.each do |provider| %>
+            <%= link_to t('devise.shared.links.sign_in_with_provider', provider: OmniAuth::Utils.camelize(provider)), omniauth_authorize_path(User, provider) %>
+          <% end -%>
+        <% else %>
+          <%= user_menu %>
+          <%- User.omniauth_providers.each do |provider| %>
+            <%= link_to t('devise.shared.links.link_to_provider', provider: OmniAuth::Utils.camelize(provider)), omniauth_authorize_path(User, provider) %>
+          <% end -%>
+        <% end %>
+      </div>
+    </div>
   </nav>
   <% if notice %>
     <p class="alert alert-notice"><%= notice %></p>
