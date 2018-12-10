@@ -28,6 +28,20 @@ module HeaderHelper
     create_menu(used_methods)
   end
 
+  def omniauth_tag(signed_in:)
+    str = if signed_in
+            'devise.shared.links.link_to_provider'
+          else
+            'devise.shared.links.sign_in_with_provider'
+          end
+    User.omniauth_providers.map do |provider|
+      tag.li do
+        link_to t(str, provider: OmniAuth::Utils.camelize(provider)),
+                omniauth_authorize_path(User, provider)
+      end
+    end.join.html_safe
+  end
+
   private
 
   # utils
