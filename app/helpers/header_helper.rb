@@ -33,7 +33,9 @@ module HeaderHelper
   # utils
   def create_menu(methods)
     methods.map do |method|
-      send(method)
+      tag.li do
+        send(method)
+      end
     end.join.html_safe
   end
 

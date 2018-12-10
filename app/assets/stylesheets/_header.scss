@@ -1,80 +1,73 @@
-header {
-  .header_menu {
-    overflow: hidden;
-    background-color: #333;
-    font-family: Arial, serif;
-
-    /* Links inside the header_menu */
-    a {
-      float: left;
-      font-size: 16px;
-      color: white;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-      /* Add a red background color to header_menu links on hover */
-      &:hover{
-        background-color: red;
-      }
-    }
-
-    /* Dropdown button */
-    @mixin drop {
-      font-size: 16px;
-      border: none;
-      outline: none;
-      color: white;
-      padding: 14px 16px;
-      background-color: inherit;
-      font-family: inherit; /* Important for vertical align on mobile phones */
-      margin: 0; /* Important for vertical align on mobile phones */
-    }
-
-    /* The dropdown container */
-    .dropdown {
-      float: left;
-      overflow: hidden;
-      @include drop;
+/* 親メニュー */
+.header_menu {
+  width: auto;
+  > ul {
+    background-color: #123456;
+    position: relative;
+    font-size: 18px;
+    li {
+      list-style: none;
+      width: 240px;
       &:hover {
-        /* Add a red background color to header_menu links on hover */
-        /* Show the dropdown menu on hover */
-        background-color: red;
-        display: block;
-      }
-    }
-
-    /* Dropdown button */
-    .dropbtn {
-      @include drop;
-      background-color: red;
-    }
-
-    /* Dropdown content (hidden by default) */
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: #f9f9f9;
-      min-width: 160px;
-      box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-      z-index: 1;
-      /* Links inside the dropdown */
-      a {
-        float: none;
-        color: black;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-        text-align: left;
-        /* Add a grey background color to dropdown links on hover */
-        &:hover {
-          background-color: #ddd;
+        > a {
+          background-color: #bbb;
         }
       }
     }
-
-    /* Show the dropdown menu on hover */
-    .dropdown:hover .dropdown-content {
+    > li {
+      float: left;
+      background-color: #987654;
+      color: white;
+      position: relative;
       display: block;
+      line-height: 32px;
+      text-align: center;
+      vertical-align: middle;
+      > a {
+        background-color: #123456;
+        display: block;
+        padding: 7px 30px;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        line-height: 18px;
+        span {
+          line-height: 18px;
+        }
+      }
+    }
+    /* 子メニュー */
+    ul {
+      visibility: hidden;
+      position: absolute;
+      width: 120px;
+      background-color: blue;
+      z-index: -1;
+      li {
+        list-style: none;
+        width: 100%;
+        a {
+          padding: 7px 0 7px 0;
+          background-color: blue;
+          display: block;
+          color: white;
+          font-size: 14px;
+          text-decoration: none;
+          &:hover {
+            background-color: #30308b;
+          }
+        }
+      }
+    }
+    li:hover {
+      ul {
+        opacity: 1;
+        visibility: visible;
+        color: #000;
+        z-index: 2;
+        top: 32px;
+        left: 0;
+      }
     }
   }
 }
