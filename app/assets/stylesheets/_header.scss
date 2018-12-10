@@ -1,72 +1,49 @@
-/* 親メニュー */
-.header_menu {
-  width: auto;
-  > ul {
-    background-color: #123456;
-    position: relative;
-    font-size: 18px;
-    li {
-      list-style: none;
-      width: 240px;
-      &:hover {
-        > a {
-          background-color: #bbb;
-        }
-      }
-    }
-    > li {
-      float: left;
-      background-color: #987654;
-      color: white;
-      position: relative;
-      display: block;
-      line-height: 32px;
-      text-align: center;
-      vertical-align: middle;
-      > a {
+/* メニュー */
+@mixin li-base {
+  vertical-align: middle;
+  a {
+    width: 100%;
+    color: white;
+    display: block;
+    text-decoration: none;
+  }
+  &:hover {
+    background-color: #bbb;
+    ul {
+      opacity: 1;
+      visibility: visible;
+      z-index: 2;
+      // 直接のli要素のみ変更されるようにする
+      li {
         background-color: #123456;
-        display: block;
-        padding: 7px 30px;
-        color: white;
-        text-align: center;
-        text-decoration: none;
-        line-height: 18px;
-        span {
-          line-height: 18px;
-        }
       }
     }
+  }
+}
+
+ul.header_menu {
+  padding: 0;
+  background-color: #123456;
+  // flex
+  display: flex;
+  justify-content: center;
+  // 全体設定
+  list-style: none;
+  text-align: center;
+  li {
+    @include li-base;
+    flex-basis: 33.33%;
+    position: relative;
     /* 子メニュー */
     ul {
+      padding: 0;
       visibility: hidden;
       position: absolute;
-      width: 120px;
-      background-color: blue;
+      list-style: none;
+      width: 100%;
       z-index: -1;
       li {
-        list-style: none;
-        width: 100%;
-        a {
-          padding: 7px 0 7px 0;
-          background-color: blue;
-          display: block;
-          color: white;
-          font-size: 14px;
-          text-decoration: none;
-          &:hover {
-            background-color: #30308b;
-          }
-        }
-      }
-    }
-    li:hover {
-      ul {
-        opacity: 1;
-        visibility: visible;
-        color: #000;
-        z-index: 2;
-        top: 32px;
-        left: 0;
+        @include li-base;
       }
     }
   }
