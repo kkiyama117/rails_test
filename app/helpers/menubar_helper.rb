@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module HeaderHelper
+module MenubarHelper
   def user_menu
     used_methods = %i[edit_profile_link logout_link]
     case controller_name
