@@ -7,13 +7,13 @@ ruby '2.6.1'
 
 # BASE =========================================================================
 # rails
-gem 'rails', '~> 5.2.2'
+gem 'rails', '>= 5.2.2.1'
 
 # MODEL ========================================================================
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 # User auth
-gem 'devise'
+gem 'devise', ">= 4.6.0"
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
@@ -51,7 +51,7 @@ gem 'sqlite3', '~>1.3.6'
 
 # OTHERS =======================================================================
 # SERVER
-gem 'puma', '~> 3.11'
+gem 'puma'
 
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
