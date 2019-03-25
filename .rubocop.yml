@@ -24,7 +24,7 @@ ClassLength:
 
 # 行が長すぎる
 LineLength:
-  Max: 100
+  Max: 120
 
 # メソッドの行数が多すぎる
 MethodLength:
