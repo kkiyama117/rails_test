@@ -7,7 +7,7 @@ ruby '2.6.1'
 
 # BASE =========================================================================
 # rails
-gem 'rails', '~> 5.2.1'
+gem 'rails', '~> 5.2.2'
 
 # MODEL ========================================================================
 # Use ActiveModel has_secure_password
@@ -42,7 +42,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'mini_racer', platforms: :ruby
 
 # DB ===========================================================================
-gem 'sqlite3'
+gem 'sqlite3', '~>1.3.6'
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
