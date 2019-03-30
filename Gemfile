@@ -17,6 +17,7 @@ gem 'devise', ">= 4.6.0"
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-github'
 # admin
 gem 'pundit'
 
@@ -41,9 +42,6 @@ gem 'jbuilder', '~> 2.5'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'mini_racer', platforms: :ruby
 
-# DB ===========================================================================
-gem 'sqlite3', '~>1.3.6'
-
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveStorage variant
@@ -60,7 +58,14 @@ gem 'bootsnap', '>= 1.1.0', require: false
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+group :production do
+# DB ===========================================================================
+
+end
+
 group :development, :test do
+  # DB ===========================================================================
+  gem 'sqlite3', '~>1.3.6'
   # speed up
   gem 'spring'
   gem 'spring-commands-rspec'

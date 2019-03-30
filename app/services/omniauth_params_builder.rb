@@ -61,4 +61,12 @@ class OmniauthParamsBuilder
       uid: auth['uid'],
       token: auth['credentials']['token'] }
   end
+
+  def get_data_with_github(auth)
+    { name: auth['info']['name'],
+      email: auth['info']['email'],
+      provider: auth['provider'],
+      uid: auth['uid'],
+      token: auth['credentials']['token'] }
+  end
 end
