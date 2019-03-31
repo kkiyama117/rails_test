@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   }
 
   # user root
-  get 'users', action: :show, controller: :users, as: :user_root
+  resources :users, only: [:index, :show, :destroy]
   root 'welcome#index'
 end
